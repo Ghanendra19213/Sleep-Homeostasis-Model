@@ -1,0 +1,14 @@
+#Sleep Awake with Sleep Pressure and Synaptic Strength Three ODEs
+
+#Parameters
+par n=2.0, ra=1.0, rs=1.0, da=0.1, ds=0.005, ns=1.0, rp=0.2, srs=0.01, Kp=5.0, At=20
+
+#Initial 
+init Aw=0, Sl=0, Sp=0
+ 
+Aw' = ra/(1+Sl^n) - da*Aw*Sp
+Sl' = rs/(1+Aw^n)*Sp - ds*Sl
+Sp' = rp*Aw^ns/(Aw^ns+Kp^ns) - srs*Sp*Sl^ns/(Sl^ns + Kp^ns)
+
+@ maxstor=100000000,total=1000,dt=.1,meth=cvode,tol=1e-5,atol=1e-5, bound=1e3
+@ xlo=0,xhi=1000,ylo=0,yhi=l0
